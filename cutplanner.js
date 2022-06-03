@@ -1,6 +1,5 @@
-// cut planner
 const source = 6;
-const elements = [5, 3, 2, 2, 3, 1, 1];
+const elements = [1, 4, 5, 3, 2, 6, 2, 3, 1, 1];
 class Cutter {
   constructor(source, elements) {
     this.source = source;
@@ -8,7 +7,8 @@ class Cutter {
     if (this.elements.find((item) => item > source))
       throw new Error("Element must be a shorter than the source");
   }
-  getSlices(elements) {
+  
+  #getSlices(elements) {
     let result = [];
     result.remains = [];
     let length = 0;
@@ -20,25 +20,25 @@ class Cutter {
       length += elem;
       result.push(elem);
     }
-    //console.log(`result.remains - ${result.remains}`);
     return result;
   }
+
   cut() {
     let result = [];
     let elements = this.elements.slice();
     while (elements.length > 0) {
-      //console.log(`elements.length - ${elements.length}`);
-      let slices = this.getSlices(elements);
-      //console.log(`remains - ${slices.remains}`);
+      let slices = this.#getSlices(elements);
       result.push(slices.slice());
-      //console.log(`result - ${result}`);
       elements = slices.remains.slice();
     }
     return result;
   }
 }
+
 let cutResult = new Cutter(source, elements).cut();
 console.log(`You need ${cutResult.length} source(s):`);
 cutResult.forEach((item, index) => {
   console.log(`cutting source #${index + 1} - ${item}`);
 });
+
+
