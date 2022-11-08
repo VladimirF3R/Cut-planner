@@ -1,11 +1,11 @@
 const source = 6;
-const elements = [1, 4, 5, 3, 2, 6, 2, 3, 1, 1];
+const elements = [1, 4, 5, 3, 2, 6, 6, 2, 3, 1, 1];
 class Cutter {
   constructor(source, elements) {
     this.source = source;
     this.elements = elements.sort((st, nd) => nd - st);
     if (this.elements.find((item) => item > source))
-      throw new Error("Element must be a shorter than the source");
+      throw new Error("Element can't be longer than the source");
   }
   
   #getSlices(elements) {
